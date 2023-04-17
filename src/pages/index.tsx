@@ -65,6 +65,24 @@ const $Item = styled.li<{ $isPangram?: boolean }>`
   text-transform: capitalize;
 `;
 
+function isPangram(letters: string[], result: string) {
+  return letters.every((ch) => result.indexOf(ch) > -1);
+}
+
+function sortResults(letters: string[]) {
+  return (r1: string, r2: string) => {
+    if (r1 < r2 || (isPangram(letters, r1) && !isPangram(letters, r2))) {
+      return -1;
+    }
+
+    if (r1 > r2 || (isPangram(letters, r1) && isPangram(letters, r2))) {
+      return 1;
+    }
+
+    return 0;
+  };
+}
+
 interface LetterInputProps
   extends Omit<React.HTMLProps<HTMLInputElement>, 'onChange' | 'value'> {
   onChange: (value: string[]) => void;
@@ -137,6 +155,8 @@ function Home() {
     });
   }
 
+  const sortedResults = [...results].sort(sortResults(letters));
+
   return (
     <$Main>
       <Head>
@@ -165,10 +185,8 @@ function Home() {
         <$Results>
           <p>{results.length} words</p>
           <$List>
-            {results.map((result) => (
-              <$Item
-                $isPangram={letters.every((ch) => result.indexOf(ch) > -1)}
-                key={result}>
+            {sortedResults.map((result) => (
+              <$Item $isPangram={isPangram(letters, result)} key={result}>
                 {result}
               </$Item>
             ))}
