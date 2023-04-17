@@ -11,20 +11,30 @@ const LETTER_COUNT = 7;
 
 const $Main = styled.main`
   max-width: 500px;
-  margin: 0 auto;
+  margin: 32px auto;
   text-align: center;
+`;
+
+const $Bee = styled.div`
+  background-image: url('./spelling-bee-icon.svg');
+  height: 56px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 4px;
 `;
 
 const $Title = styled.h1`
   font-family: 'nyt-karnakcondensed', Arial, Helvetica, sans-serif;
   font-size: 42px;
-  margin-bottom: 32px;
+  margin: 0 0 16px 0;
 `;
 
 const $InputContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   gap: 8px;
-  margin-bottom: 16px;
+  margin: 32px 0;
 `;
 
 const $ButtonGroup = styled.div`
@@ -132,8 +142,9 @@ function Home() {
       <Head>
         <title>Spelling Bee Solver</title>
       </Head>
+      <$Bee />
       <$Title>Spelling Bee Solver</$Title>
-      <p>Enter today{"'"}s letters:</p>
+      <p>Enter today{"'"}s letters</p>
       <LetterInput
         disabled={!!results.length}
         onChange={setLetters}
