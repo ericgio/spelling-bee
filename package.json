@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen": "node ./src/scripts/filterWords.js",
+    "normalize": "node ./src/scripts/normalizeLists.js"
   },
   "dependencies": {
     "@types/node": "18.15.11",
