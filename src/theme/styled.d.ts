@@ -1,10 +1,11 @@
 import 'styled-components';
 
-import { colors } from './theme';
+import { breakpoints, colors } from './theme';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
     borderRadius: string;
+    breakpoints: typeof breakpoints;
     colors: typeof colors;
   }
 }

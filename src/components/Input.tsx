@@ -5,27 +5,33 @@ const $Container = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  width: 12%;
+  width: 68px;
 `;
 
 const $Hex = styled.div<{ $required?: boolean }>`
   color: ${({ theme, $required }) =>
     $required ? theme.colors.yellow : theme.colors.grey};
-  font-size: 125px;
+  font-size: 84px;
   line-height: 0.35;
   position: absolute;
-  left: -12px;
-  top: 1px;
+  left: -6px;
+  top: 0;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}px) {
+    font-size: 125px;
+    left: -8px;
+    top: 1px;
+  }
 `;
 
 const $Input = styled.input<{ required?: boolean }>`
-  /* background-color: ${({ theme }) => theme.colors.grey}; */
   background-color: transparent;
   border: 0;
   font-family: 'nyt-franklin', Arial, Helvetica, sans-serif;
-  font-size: 2em;
+  font-size: 24px;
   font-weight: 700;
-  padding: 8px;
+  outline: none;
+  padding: 4px 8px;
   position: relative;
   text-align: center;
   text-transform: uppercase;
@@ -35,14 +41,14 @@ const $Input = styled.input<{ required?: boolean }>`
   ${({ required, theme }) => {
     if (required) {
       return `
-        // background-color: ${theme.colors.yellow};
         color: ${theme.colors.black};
       `;
     }
   }}
 
-  &:focus {
-    /* background-color: transparent; */
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}px) {
+    font-size: 32px;
+    padding: 8px;
   }
 `;
 

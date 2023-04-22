@@ -8,9 +8,14 @@ export const colors = {
   yellow: '#f7da21',
 };
 
+export const breakpoints = {
+  tablet: 700,
+};
+
 const theme: DefaultTheme = {
   borderRadius: '6px',
   colors,
+  breakpoints,
 };
 
 export default theme;
