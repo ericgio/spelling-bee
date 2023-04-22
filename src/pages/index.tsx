@@ -26,7 +26,7 @@ const $Main = styled.main`
   }
 `;
 
-const $Bee = styled.div`
+const $Logo = styled.div`
   background-image: url('./spelling-bee-icon.svg');
   height: 56px;
   background-size: contain;
@@ -171,9 +171,9 @@ function Home() {
       <Head>
         <title>Spelling Bee Solver</title>
       </Head>
-      <$Bee />
+      <$Logo />
       <$Title>Spelling Bee Solver</$Title>
-      <p>Enter today{"'"}s letters</p>
+      <p>Enter today{'’'}s letters</p>
       <LetterInput
         disabled={!!results.length}
         onChange={setLetters}

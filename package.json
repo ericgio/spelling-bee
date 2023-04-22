@@ -14,15 +14,18 @@
     "@types/node": "18.15.11",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
+    "date-fns": "^2.29.3",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "next": "13.3.0",
+    "qs": "^6.11.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "styled-components": "^5.3.9",
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@types/qs": "^6.9.7",
     "@types/styled-components": "^5.1.26"
   }
 }
