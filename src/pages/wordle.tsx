@@ -127,12 +127,13 @@ function Wordle() {
     fetch(`/api/wordle?date=${date}`)
       .then((results) => results.json())
       .then((data) => setData(data));
-  }, []);
+  }, [date]);
 
   return (
     <$Main>
       <Head>
         <title>Wordle Solver</title>
+        <link rel="shortcut icon" href="/wordle-favicon.ico" />
       </Head>
       <$Logo />
       <$Title>Wordle Solver</$Title>

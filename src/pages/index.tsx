@@ -170,6 +170,7 @@ function Home() {
     <$Main>
       <Head>
         <title>Spelling Bee Solver</title>
+        <link rel="shortcut icon" href="/spelling-bee-favicon.ico" />
       </Head>
       <$Logo />
       <$Title>Spelling Bee Solver</$Title>
