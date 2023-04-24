@@ -8,7 +8,7 @@ const $Icon = styled.div<{ $size: number; $src: string }>`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
 `;
 
 interface IconProps {

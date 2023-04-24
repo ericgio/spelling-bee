@@ -28,22 +28,22 @@ const $Main = styled(Page.Main)`
 const $InputContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin: 32px 0;
+  gap: 0.5rem;
+  margin: 2rem 0;
   user-select: none;
 `;
 
 const $ButtonGroup = styled.div`
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 0.5rem;
 `;
 
 const $Results = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.borderColor};
   border-radius: ${({ theme }) => theme.borderRadius};
-  margin-top: 32px;
-  padding: 16px 24px;
+  margin-top: 2rem;
+  padding: 1rem 1.5rem;
   text-align: left;
 `;
 

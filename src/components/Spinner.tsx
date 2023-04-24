@@ -9,7 +9,7 @@ const spinnerBorder = keyframes`
 const $Spinner = styled.div`
   animation: 0.75s linear infinite ${spinnerBorder};
   aspect-ratio: 1;
-  border: 2px solid ${({ theme }) => theme.colors.borderColor};
+  border: 0.125rem solid ${({ theme }) => theme.colors.borderColor};
   border-radius: 50%;
   border-right-color: transparent;
   display: inline-block;

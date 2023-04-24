@@ -27,10 +27,10 @@ const $Hex = styled.div<{ $required?: boolean }>`
 const $Input = styled.input<{ required?: boolean }>`
   background-color: transparent;
   border: 0;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 700;
   outline: none;
-  padding: 4px 8px;
+  padding: 0.25rem 0.5rem;
   position: relative;
   text-align: center;
   text-transform: uppercase;
@@ -46,8 +46,8 @@ const $Input = styled.input<{ required?: boolean }>`
   }}
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}px) {
-    font-size: 32px;
-    padding: 8px;
+    font-size: 2rem;
+    padding: 0.5rem;
   }
 `;
 

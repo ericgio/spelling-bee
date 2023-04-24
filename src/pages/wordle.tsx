@@ -23,16 +23,19 @@ interface WordleData {
 const $DateInput = styled.input.attrs({ type: 'date' })`
   background-color: ${({ theme }) => theme.colors.white};
   border: 2px solid ${({ theme }) => theme.colors.borderColor};
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   box-sizing: border-box;
   color: ${({ theme }) => theme.colors.black};
-  font-size: 18px;
-  padding: 8px 12px;
+  display: block;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0.5rem 0.75rem;
   width: 100%;
 
   &:focus {
     border-color: ${({ theme }) => theme.colors.wordle.green};
-    outline: 2px solid ${({ theme }) => theme.colors.wordle.green}40;
+    box-shadow: 0 0 0 0.25rem ${({ theme }) => theme.colors.wordle.green}40;
+    outline: 0;
   }
 `;
 
@@ -40,7 +43,7 @@ const $Metadata = styled.div`
   font-size: 1em;
   line-height: 1.25;
   letter-spacing: 0.005em;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
 
   & > :first-child {
     font-weight: 600;
@@ -48,7 +51,7 @@ const $Metadata = styled.div`
 `;
 
 const $Solution = styled.div`
-  margin: 24px 0;
+  margin: 1.5rem 0;
 `;
 
 const $Board = styled.div`
