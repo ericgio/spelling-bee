@@ -1,11 +1,12 @@
 import { addDays, format, parseISO } from 'date-fns';
-import Head from 'next/head';
 import * as React from 'react';
 import styled from 'styled-components';
 
+import Icon from '../components/Icon';
+import Page from '../components/Page';
+import Spinner from '../components/Spinner';
 import Tile from '../components/Tile';
 import Title from '../components/Title';
-import Spinner from '../components/Spinner';
 
 const MAX_DATE = format(addDays(new Date(), -1), 'yyyy-MM-dd');
 const MIN_DATE = '2021-06-19';
@@ -18,28 +19,6 @@ interface WordleData {
   print_date: string;
   solution: string;
 }
-
-const $Page = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-`;
-
-const $Main = styled.main`
-  max-width: 360px;
-  margin: 0 auto;
-  padding: 64px 0;
-  text-align: center;
-`;
-
-const $Logo = styled.div`
-  background-image: url('./wordle-icon.svg');
-  height: 48px;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin-bottom: 12px;
-`;
 
 const $DateInput = styled.input.attrs({ type: 'date' })`
   background-color: ${({ theme }) => theme.colors.white};
@@ -69,7 +48,7 @@ const $Metadata = styled.div`
 `;
 
 const $Solution = styled.div`
-  margin: 24px auto;
+  margin: 24px 0;
 `;
 
 const $Board = styled.div`
@@ -115,13 +94,9 @@ function Wordle() {
   }, [date]);
 
   return (
-    <$Page>
-      <$Main>
-        <Head>
-          <title>{TITLE}</title>
-          <link rel="shortcut icon" href="/wordle-favicon.ico" />
-        </Head>
-        <$Logo />
+    <Page faviconSrc="/wordle-favicon.ico" title={TITLE}>
+      <Page.Main>
+        <Icon src="/wordle.svg" />
         <Title>{TITLE}</Title>
         <$DateInput
           onChange={(e) => setDate(getValidatedDate(e))}
@@ -154,8 +129,8 @@ function Wordle() {
             <Spinner />
           </$Solution>
         )}
-      </$Main>
-    </$Page>
+      </Page.Main>
+    </Page>
   );
 }
 
