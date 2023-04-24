@@ -65,6 +65,14 @@ const $Row = styled.div`
   grid-gap: 5px;
 `;
 
+function getPuzzleNumber({ days_since_launch, id }: WordleData) {
+  if (!days_since_launch) {
+    return id;
+  }
+
+  return id - days_since_launch === 1 ? id : days_since_launch;
+}
+
 function getValidatedDate(e: React.ChangeEvent<HTMLInputElement>) {
   const { value } = e.target;
 
@@ -120,7 +128,7 @@ function Wordle() {
                 Solution for{' '}
                 {format(parseISO(data.print_date), 'MMMM dd, yyyy')}
               </div>
-              <div>No. {data.days_since_launch}</div>
+              <div>No. {getPuzzleNumber(data)}</div>
               <div>Edited by {data.editor}</div>
             </$Metadata>
           </>
