@@ -3,8 +3,12 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyles = createGlobalStyle`
   body {
     color: #333;
-    font-family: 'nyt-franklin', Arial, Helvetica, sans-serif;
+    font-family: ${({ theme }) => theme.fontFamily.text};
     -webkit-font-smoothing: antialiased;
+  }
+
+  input {
+    font-family: ${({ theme }) => theme.fontFamily.text};
   }
 
   p {

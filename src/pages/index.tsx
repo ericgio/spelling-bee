@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import Button from '../components/Button';
 import Input from '../components/Input';
+import Title from '../components/Title';
 
 import {
   dedupeArray,
@@ -33,12 +34,6 @@ const $Logo = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: 4px;
-`;
-
-const $Title = styled.h1`
-  font-family: 'nyt-karnakcondensed', Arial, Helvetica, sans-serif;
-  font-size: 42px;
-  margin: 0 0 16px 0;
 `;
 
 const $InputContainer = styled.div`
@@ -173,7 +168,7 @@ function Home() {
         <link rel="shortcut icon" href="/spelling-bee-favicon.ico" />
       </Head>
       <$Logo />
-      <$Title>Spelling Bee Solver</$Title>
+      <Title>Spelling Bee Solver</Title>
       <p>Enter today{'’'}s letters</p>
       <LetterInput
         disabled={!!results.length}

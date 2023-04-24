@@ -1,11 +1,15 @@
-import { format, parseISO } from 'date-fns';
+import { addDays, format, isValid, parseISO, parse } from 'date-fns';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import qs from 'qs';
 import * as React from 'react';
 import styled from 'styled-components';
 
-type TileState = 'empty' | 'tbd' | 'absent' | 'present' | 'correct';
+import Tile from '../components/Tile';
+import Title from '../components/Title';
+
+const MAX_DATE = format(addDays(new Date(), -1), 'yyyy-MM-dd');
+const MIN_DATE = '2021-06-19';
+const TITLE = 'Wordle Solutions';
 
 interface WordleData {
   days_since_launch: number;
@@ -13,6 +17,11 @@ interface WordleData {
   id: number;
   print_date: string;
   solution: string;
+}
+
+interface WordleError {
+  status: string;
+  errors: string[];
 }
 
 const $Main = styled.main`
@@ -34,10 +43,12 @@ const $Logo = styled.div`
   margin-bottom: 12px;
 `;
 
-const $Title = styled.h1`
-  font-family: 'nyt-karnakcondensed', Arial, Helvetica, sans-serif;
-  font-size: 42px;
-  margin: 0 0 16px 0;
+const $DateInput = styled.input.attrs({ type: 'date' })`
+  border: 1px solid ${({ theme }) => theme.colors.borderColor};
+  font-size: 21px;
+  padding: 8px 12px;
+
+  outline-color: ${({ theme }) => theme.colors.wordle.green};
 `;
 
 const $Metadata = styled.div`
@@ -52,7 +63,7 @@ const $Metadata = styled.div`
 `;
 
 const $Solution = styled.div`
-  margin: 0 auto;
+  margin: 24px auto;
   width: 360px;
 `;
 
@@ -70,75 +81,59 @@ const $Row = styled.div`
   grid-gap: 5px;
 `;
 
-const $Tile = styled.div<{ $state: TileState }>`
-  aspect-ratio: 1;
-  box-sizing: border-box;
-  color: #fff;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'nyt-franklin';
-  font-size: 2rem;
-  font-weight: bold;
-  line-height: 1;
-  vertical-align: middle;
-  text-transform: uppercase;
-  user-select: none;
-  width: 100%;
+function getValidatedDate(e: React.ChangeEvent<HTMLInputElement>) {
+  const { value } = e.target;
 
-  ${({ $state, theme }) => {
-    switch ($state) {
-      case 'empty':
-        return `
-          border: 2px solid ${theme.colors.borderColor};
-        `;
-      case 'tbd':
-        return `
-          border: 2px solid #878a8c;
-          color: #000;
-        `;
-      case 'absent':
-        return `
-          background-color: #787c7e;
-        `;
-      case 'present':
-        return `
-          background-color: #c9b458;
-        `;
-      case 'correct':
-        return `
-          background-color: #6aaa64;
-        `;
-    }
-  }}
-`;
-
-function Wordle() {
-  const { asPath, pathname } = useRouter();
-  const [data, setData] = React.useState<WordleData | null>(null);
-
-  let date = '2023-04-21';
-  const queryString = asPath.split('?').at(-1);
-  if (queryString && queryString !== pathname) {
-    date = qs.parse(queryString).d as string;
+  if (value < MIN_DATE) {
+    return MIN_DATE;
   }
 
+  if (value > MAX_DATE) {
+    return MAX_DATE;
+  }
+
+  return value;
+}
+
+function Wordle() {
+  const [data, setData] = React.useState<WordleData | null>(null);
+  const [date, setDate] = React.useState<string>(MAX_DATE);
+
   React.useEffect(() => {
-    fetch(`/api/wordle?date=${date}`)
-      .then((results) => results.json())
-      .then((data) => setData(data));
+    async function fetchSolution() {
+      const result = await fetch(`/api/wordle?date=${date}`);
+      const data = await result.json();
+      setData(data);
+    }
+
+    fetchSolution();
   }, [date]);
 
   return (
     <$Main>
       <Head>
-        <title>Wordle Solver</title>
+        <title>{TITLE}</title>
         <link rel="shortcut icon" href="/wordle-favicon.ico" />
       </Head>
       <$Logo />
-      <$Title>Wordle Solver</$Title>
+      <Title>{TITLE}</Title>
+      <$DateInput
+        onChange={(e) => setDate(getValidatedDate(e))}
+        max={MAX_DATE}
+        min={MIN_DATE}
+        value={date}
+      />
       {data && (
         <>
+          <$Solution>
+            <$Row>
+              {Array.from(Array(5).keys()).map((idx) => (
+                <Tile key={idx} state="correct">
+                  {data.solution[idx]}
+                </Tile>
+              ))}
+            </$Row>
+          </$Solution>
           <$Metadata>
             <div>
               Solution for {format(parseISO(data.print_date), 'MMMM dd, yyyy')}
@@ -146,15 +141,6 @@ function Wordle() {
             <div>No. {data.days_since_launch}</div>
             <div>Edited by {data.editor}</div>
           </$Metadata>
-          <$Solution>
-            <$Row>
-              {Array.from(Array(5).keys()).map((idx) => (
-                <$Tile key={idx} $state="correct">
-                  {data.solution[idx]}
-                </$Tile>
-              ))}
-            </$Row>
-          </$Solution>
         </>
       )}
     </$Main>

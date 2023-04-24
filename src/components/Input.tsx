@@ -27,7 +27,6 @@ const $Hex = styled.div<{ $required?: boolean }>`
 const $Input = styled.input<{ required?: boolean }>`
   background-color: transparent;
   border: 0;
-  font-family: 'nyt-franklin', Arial, Helvetica, sans-serif;
   font-size: 24px;
   font-weight: 700;
   outline: none;
