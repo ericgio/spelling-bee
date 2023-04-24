@@ -4,6 +4,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     color: #333;
     font-family: ${({ theme }) => theme.fontFamily.text};
+    margin: 0;
     -webkit-font-smoothing: antialiased;
   }
 

@@ -1,11 +1,11 @@
-import { addDays, format, isValid, parseISO, parse } from 'date-fns';
+import { addDays, format, parseISO } from 'date-fns';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import * as React from 'react';
 import styled from 'styled-components';
 
 import Tile from '../components/Tile';
 import Title from '../components/Title';
+import Spinner from '../components/Spinner';
 
 const MAX_DATE = format(addDays(new Date(), -1), 'yyyy-MM-dd');
 const MIN_DATE = '2021-06-19';
@@ -19,19 +19,17 @@ interface WordleData {
   solution: string;
 }
 
-interface WordleError {
-  status: string;
-  errors: string[];
-}
+const $Page = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
 
 const $Main = styled.main`
   max-width: 360px;
-  margin: 32px auto;
+  margin: 0 auto;
+  padding: 64px 0;
   text-align: center;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}px) {
-    max-width: 640px;
-  }
 `;
 
 const $Logo = styled.div`
@@ -44,11 +42,19 @@ const $Logo = styled.div`
 `;
 
 const $DateInput = styled.input.attrs({ type: 'date' })`
-  border: 1px solid ${({ theme }) => theme.colors.borderColor};
-  font-size: 21px;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 2px solid ${({ theme }) => theme.colors.borderColor};
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  color: ${({ theme }) => theme.colors.black};
+  font-size: 18px;
   padding: 8px 12px;
+  width: 100%;
 
-  outline-color: ${({ theme }) => theme.colors.wordle.green};
+  &:focus {
+    border-color: ${({ theme }) => theme.colors.wordle.green};
+    outline: 2px solid ${({ theme }) => theme.colors.wordle.green}40;
+  }
 `;
 
 const $Metadata = styled.div`
@@ -64,7 +70,6 @@ const $Metadata = styled.div`
 
 const $Solution = styled.div`
   margin: 24px auto;
-  width: 360px;
 `;
 
 const $Board = styled.div`
@@ -110,40 +115,47 @@ function Wordle() {
   }, [date]);
 
   return (
-    <$Main>
-      <Head>
-        <title>{TITLE}</title>
-        <link rel="shortcut icon" href="/wordle-favicon.ico" />
-      </Head>
-      <$Logo />
-      <Title>{TITLE}</Title>
-      <$DateInput
-        onChange={(e) => setDate(getValidatedDate(e))}
-        max={MAX_DATE}
-        min={MIN_DATE}
-        value={date}
-      />
-      {data && (
-        <>
+    <$Page>
+      <$Main>
+        <Head>
+          <title>{TITLE}</title>
+          <link rel="shortcut icon" href="/wordle-favicon.ico" />
+        </Head>
+        <$Logo />
+        <Title>{TITLE}</Title>
+        <$DateInput
+          onChange={(e) => setDate(getValidatedDate(e))}
+          max={MAX_DATE}
+          min={MIN_DATE}
+          value={date}
+        />
+        {data ? (
+          <>
+            <$Solution>
+              <$Row>
+                {Array.from(Array(5).keys()).map((idx) => (
+                  <Tile key={idx} state="correct">
+                    {data.solution[idx]}
+                  </Tile>
+                ))}
+              </$Row>
+            </$Solution>
+            <$Metadata>
+              <div>
+                Solution for{' '}
+                {format(parseISO(data.print_date), 'MMMM dd, yyyy')}
+              </div>
+              <div>No. {data.days_since_launch}</div>
+              <div>Edited by {data.editor}</div>
+            </$Metadata>
+          </>
+        ) : (
           <$Solution>
-            <$Row>
-              {Array.from(Array(5).keys()).map((idx) => (
-                <Tile key={idx} state="correct">
-                  {data.solution[idx]}
-                </Tile>
-              ))}
-            </$Row>
+            <Spinner />
           </$Solution>
-          <$Metadata>
-            <div>
-              Solution for {format(parseISO(data.print_date), 'MMMM dd, yyyy')}
-            </div>
-            <div>No. {data.days_since_launch}</div>
-            <div>Edited by {data.editor}</div>
-          </$Metadata>
-        </>
-      )}
-    </$Main>
+        )}
+      </$Main>
+    </$Page>
   );
 }
 
