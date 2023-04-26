@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import solutions from '../../data/wordle-solutions.json';
@@ -10,8 +11,8 @@ async function getSolution(req: NextApiRequest, res: NextApiResponse) {
   let solution = solutions.find((s) => s.print_date === date);
 
   if (!solution) {
-    const response = await fetch(`${API_URL}/${date}.json`);
-    solution = await response.json();
+    const { data } = await axios.get(`${API_URL}/${date}.json`);
+    solution = data;
   }
 
   res.status(200).json(solution);

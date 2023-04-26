@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { addDays, format, parseISO } from 'date-fns';
 import * as React from 'react';
 import styled from 'styled-components';
@@ -96,8 +97,7 @@ function Wordle() {
 
   React.useEffect(() => {
     async function fetchSolution() {
-      const result = await fetch(`/api/wordle?date=${date}`);
-      const data = await result.json();
+      const { data } = await axios.get(`/api/wordle?date=${date}`);
       setData(data);
     }
 

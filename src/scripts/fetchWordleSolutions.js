@@ -1,33 +1,39 @@
+const axios = require('axios');
 const { addDays, format, parseISO } = require('date-fns');
 const fs = require('fs');
+
+const wordleSolutions = require('../data/wordle-solutions.json');
 
 const MAX_DATE = format(addDays(new Date(), -1), 'yyyy-MM-dd');
 const MIN_DATE = '2021-06-19';
 
 const API_URL = 'https://www.nytimes.com/svc/wordle/v2';
 
-async function fetchSolution(date) {
-  const result = await fetch(`${API_URL}/${date}.json`);
-  return result.json();
-}
-
 async function fetchAllSolutions() {
-  const solutions = [];
+  const solutions = wordleSolutions || [];
 
   let date = MIN_DATE;
   while (date <= MAX_DATE) {
-    const data = await fetchSolution(date);
+    const nextDate = format(addDays(parseISO(date), 1), 'yyyy-MM-dd');
+
+    // Skip fetching solutions for dates we already have.
+    if (solutions.find((s) => s.print_date === date)) {
+      date = nextDate;
+      continue;
+    }
+
+    const { data } = await axios.get(`${API_URL}/${date}.json`);
     console.log(`Fetched solution for ${date}`);
     solutions.push(data);
 
     // Increment the date.
-    date = format(addDays(parseISO(date), 1), 'yyyy-MM-dd');
+    date = nextDate;
   }
 
   return solutions;
 }
 
-const solutions = fetchAllSolutions().then((solutions) => {
+fetchAllSolutions().then((solutions) => {
   fs.writeFileSync(
     './src/data/wordle-solutions.json',
     JSON.stringify(solutions)
