@@ -3,11 +3,10 @@ import { addDays, format, parseISO } from 'date-fns';
 import * as React from 'react';
 import styled from 'styled-components';
 
-import Icon from '../components/Icon';
+import Input from '../components/Input';
 import Page from '../components/Page';
 import Spinner from '../components/Spinner';
 import Tile from '../components/Tile';
-import Title from '../components/Title';
 
 const MAX_DATE = format(addDays(new Date(), -1), 'yyyy-MM-dd');
 const MIN_DATE = '2021-06-19';
@@ -20,25 +19,6 @@ interface WordleData {
   print_date: string;
   solution: string;
 }
-
-const $DateInput = styled.input.attrs({ type: 'date' })`
-  background-color: ${({ theme }) => theme.colors.white};
-  border: 2px solid ${({ theme }) => theme.colors.borderColor};
-  border-radius: 0.5rem;
-  box-sizing: border-box;
-  color: ${({ theme }) => theme.colors.black};
-  display: block;
-  font-size: 1rem;
-  line-height: 1.5;
-  padding: 0.5rem 0.75rem;
-  width: 100%;
-
-  &:focus {
-    border-color: ${({ theme }) => theme.colors.wordle.green};
-    box-shadow: 0 0 0 0.25rem ${({ theme }) => theme.colors.wordle.green}40;
-    outline: 0;
-  }
-`;
 
 const $Metadata = styled.div`
   font-size: 1em;
@@ -53,14 +33,6 @@ const $Metadata = styled.div`
 
 const $Solution = styled.div`
   margin: 1.5rem 0;
-`;
-
-const $Board = styled.div`
-  display: grid;
-  grid-template-rows: repeat(6, 1fr);
-  grid-gap: 5px;
-  padding: 10px;
-  box-sizing: border-box;
 `;
 
 const $Row = styled.div`
@@ -107,12 +79,12 @@ function Wordle() {
   return (
     <Page faviconSrc="/wordle-favicon.ico" title={TITLE}>
       <Page.Main>
-        <Icon src="/wordle.svg" />
-        <Title>{TITLE}</Title>
-        <$DateInput
+        <Page.Title icon="wordle">{TITLE}</Page.Title>
+        <Input
           onChange={(e) => setDate(getValidatedDate(e))}
           max={MAX_DATE}
           min={MIN_DATE}
+          type="date"
           value={date}
         />
         {data ? (

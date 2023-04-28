@@ -2,9 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import Button from '../components/Button';
-import Icon from '../components/Icon';
-import Input from '../components/Input';
-import Title from '../components/Title';
+import HexInput from '../components/HexInput';
 
 import {
   dedupeArray,
@@ -93,7 +91,7 @@ function LetterInput(props: LetterInputProps) {
   return (
     <$InputContainer ref={containerRef}>
       {Array.from(Array(LETTER_COUNT).keys()).map((idx) => (
-        <Input
+        <HexInput
           key={idx}
           maxLength={1}
           onChange={() => {
@@ -174,8 +172,7 @@ function Home() {
   return (
     <Page faviconSrc="/spelling-bee-favicon.ico" title={TITLE}>
       <$Main>
-        <Icon src="/spelling-bee.svg" />
-        <Title>{TITLE}</Title>
+        <Page.Title icon="spelling-bee">{TITLE}</Page.Title>
         <p>Enter today{'’'}s letters</p>
         <LetterInput
           disabled={!!results.length}

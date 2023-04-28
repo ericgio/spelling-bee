@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import * as React from 'react';
 import styled from 'styled-components';
+import Icon from './Icon';
 
 const HEADER_HEIGHT = 45;
 
@@ -44,6 +45,26 @@ const $Main = styled.main`
   text-align: center;
 `;
 
+const $Title = styled.h2`
+  font-family: ${({ theme }) => theme.fontFamily.title};
+  font-size: 42px;
+  margin: 0 0 1rem 0;
+`;
+
+interface TitleProps {
+  children: string;
+  icon: 'wordle' | 'spelling-bee';
+}
+
+function Title({ children, icon }: TitleProps) {
+  return (
+    <>
+      <Icon src={`/${icon}.svg`} />
+      <$Title>{children}</$Title>
+    </>
+  );
+}
+
 interface PageProps {
   children?: React.ReactNode;
   faviconSrc?: string;
@@ -72,5 +93,6 @@ function Page(props: PageProps) {
 }
 
 Page.Main = $Main;
+Page.Title = Title;
 
 export default Page;
