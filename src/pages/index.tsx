@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import Page from '../components/Page';
-import Icon from '@/components/Icon';
+import Icon from '../components/Icon';
 
 const $List = styled.ul`
   display: flex;

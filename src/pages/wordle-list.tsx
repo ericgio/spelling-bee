@@ -53,6 +53,13 @@ function Wordle() {
           value={excludes}
           type="text"
         />
+        <$Solution>
+          <TileInput />
+          <TileInput />
+          <TileInput />
+          <TileInput />
+          <TileInput />
+        </$Solution>
         {value.length > 1 && (
           <$Solution>
             <p>{results.length} results</p>
