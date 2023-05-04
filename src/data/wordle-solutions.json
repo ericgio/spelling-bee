@@ -4729,5 +4729,61 @@
     "print_date": "2023-04-25",
     "days_since_launch": 675,
     "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2081,
+    "solution": "metro",
+    "print_date": "2023-04-26",
+    "days_since_launch": 676,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1316,
+    "solution": "logic",
+    "print_date": "2023-04-27",
+    "days_since_launch": 677,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1978,
+    "solution": "circa",
+    "print_date": "2023-04-28",
+    "days_since_launch": 678,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1297,
+    "solution": "cedar",
+    "print_date": "2023-04-29",
+    "days_since_launch": 679,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1894,
+    "solution": "plaza",
+    "print_date": "2023-04-30",
+    "days_since_launch": 680,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 785,
+    "solution": "range",
+    "print_date": "2023-05-01",
+    "days_since_launch": 681,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1333,
+    "solution": "sulky",
+    "print_date": "2023-05-02",
+    "days_since_launch": 682,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1300,
+    "solution": "horde",
+    "print_date": "2023-05-03",
+    "days_since_launch": 683,
+    "editor": "Tracy Bennett"
   }
 ]
