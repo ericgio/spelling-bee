@@ -68,20 +68,20 @@ function Home() {
       <Page.Main>
         <$List>
           <GameCard
-            description="Generate the word list from 7 letters."
+            description="Generate today’s answers."
             href="/spelling-bee"
             name="Spelling Bee Solver"
             src="/spelling-bee.svg"
           />
           <GameCard
-            description="Historical Wordle solution for a given day."
-            href="/wordle"
+            description="Every Wordle solution by day."
+            href="/wordle-solutions"
             name="Wordle Solutions"
             src="/wordle.svg"
           />
           <GameCard
             description="Get a list of possible Wordle solutions."
-            href="/wordle-list"
+            href="/wordle-helper"
             name="Wordle Helper"
             src="/wordle.svg"
           />

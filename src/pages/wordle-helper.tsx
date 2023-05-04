@@ -131,6 +131,7 @@ function WordleHelper() {
       <Page.Main>
         <Page.Title icon="wordle">{TITLE}</Page.Title>
         <$Solution>
+          <p>Enter a guess for today’s puzzle</p>
           {guesses.map((guess) => (
             <$Row key={guess}>
               {guess.split('').map((char, idx) => (
