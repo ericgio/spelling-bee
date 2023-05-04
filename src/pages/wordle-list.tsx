@@ -8,7 +8,7 @@ import Tile from '../components/Tile';
 import solutions from '../data/wordle-solutions.json';
 import list from '../data/wordle.json';
 
-const TITLE = 'Wordle Solutions';
+const TITLE = 'Wordle Helper';
 
 const $Solution = styled.div`
   display: flex;

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-const $Icon = styled.div<{ $size: number; $src: string }>`
+const $Icon = styled.div<{ $size: string; $src: string }>`
   aspect-ratio: 1;
   background-image: url(${({ $src }) => $src});
-  height: ${({ $size }) => $size}px;
+  height: ${({ $size }) => $size};
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -13,10 +13,10 @@ const $Icon = styled.div<{ $size: number; $src: string }>`
 
 interface IconProps {
   src: string;
-  size?: number;
+  size?: string;
 }
 
-function Icon({ size = 48, src }: IconProps) {
+function Icon({ size = '3rem', src }: IconProps) {
   return <$Icon $size={size} $src={src} />;
 }
 

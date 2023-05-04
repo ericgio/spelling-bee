@@ -8,7 +8,7 @@ import Icon from '@/components/Icon';
 const $List = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -16,39 +16,47 @@ const $List = styled.ul`
 
 const $ListItemLink = styled(Link)`
   border: 1px solid ${({ theme }) => theme.colors.borderColor};
-  border-radius: 8px;
+  border-radius: 0.5rem;
   color: ${({ theme }) => theme.colors.black};
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
   justify-content: center;
-  padding: 24px;
+  padding: 1.5rem;
   text-align: center;
   text-decoration: none;
 `;
 
 const $Title = styled.h2`
   font-family: ${({ theme }) => theme.fontFamily.title};
-  font-size: 28px;
+  font-size: 1.1875rem;
   margin: 0;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.mobile}px) {
-    font-size: 36px;
+    font-size: 1.75rem;
   }
 `;
 
+const $Description = styled.p`
+  color: ${({ theme }) => theme.colors.greyText};
+  line-height: 20px;
+  margin: 0;
+`;
+
 interface ListItemProps {
+  description?: string;
   href: string;
   name: string;
   src: string;
 }
 
-function ListItem({ href, name, src }: ListItemProps) {
+function GameCard({ description, href, name, src }: ListItemProps) {
   return (
     <li>
       <$ListItemLink href={href}>
-        <Icon size={36} src={src} />
+        <Icon src={src} />
         <$Title>{name}</$Title>
+        {description && <$Description>{description}</$Description>}
       </$ListItemLink>
     </li>
   );
@@ -59,12 +67,24 @@ function Home() {
     <Page faviconSrc="/wordle-favicon.ico" title="WordGames">
       <Page.Main>
         <$List>
-          <ListItem
+          <GameCard
+            description="Generate the word list from 7 letters."
             href="/spelling-bee"
             name="Spelling Bee Solver"
             src="/spelling-bee.svg"
           />
-          <ListItem href="/wordle" name="Wordle Solutions" src="/wordle.svg" />
+          <GameCard
+            description="Historical Wordle solution for a given day."
+            href="/wordle"
+            name="Wordle Solutions"
+            src="/wordle.svg"
+          />
+          <GameCard
+            description="Get a list of possible Wordle solutions."
+            href="/wordle-list"
+            name="Wordle Helper"
+            src="/wordle.svg"
+          />
         </$List>
       </Page.Main>
     </Page>
