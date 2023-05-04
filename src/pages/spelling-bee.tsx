@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Button from '../components/Button';
 import HexInput from '../components/HexInput';
+import Page from '../components/Page';
 
 import {
   dedupeArray,
@@ -12,7 +13,6 @@ import {
 } from '../utils';
 
 import { useOnKeyDown, useOnPaste } from '../hooks';
-import Page from '@/components/Page';
 
 const LETTER_COUNT = 7;
 const TITLE = 'Spelling Bee Solver';

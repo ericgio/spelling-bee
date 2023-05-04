@@ -1,4 +1,5 @@
 import words from './data/spellingBee.json';
+import { TileState } from './components/Tile';
 
 /**
  * De-dupes the string entries in a flat array.
@@ -50,5 +51,100 @@ export function sortSpellingBeeResults(letters: string[]) {
     }
 
     return 0;
+  };
+}
+
+export function wordleSolver(guesses: string[], solution: string) {
+  const exclude: string[] = [];
+  const include: string[] = [];
+  const excludeAtIndex: Record<number, string> = {};
+  const includeAtIndex: Record<number, string> = {};
+
+  guesses.forEach((guess) => {
+    guess.split('').forEach((char, idx) => {
+      // Correct character in the correct place.
+      if (char === solution[idx]) {
+        includeAtIndex[idx] = char;
+        return;
+      }
+
+      // Incorrect character.
+      if (!solution.includes(char)) {
+        !exclude.includes(char) && exclude.push(char);
+        return;
+      }
+
+      // Wrong location, possibly
+      if (solution.includes(char)) {
+        excludeAtIndex[idx] = char;
+      }
+
+      // Valid letter, include.
+      !include.includes(char) && include.push(char);
+    });
+  });
+
+  function getState(guess: string, idx: number) {
+    const ch = guess[idx];
+
+    if (includeAtIndex[idx] === ch) {
+      return 'correct';
+    }
+
+    if (exclude.includes(ch)) {
+      return 'absent';
+    }
+
+    const countInGuess = guess.split(ch).length - 1;
+    const countInSolution = solution.split(ch).length - 1;
+
+    // If the character appears the same number of times in the guess as the
+    // solution then the character is simply in the wrong place.
+    if (countInGuess === countInSolution) {
+      return 'present';
+    }
+
+    let charFrequencyIndex = 0;
+    for (let ii = 0; ii <= idx; ii++) {
+      if (guess[ii] === ch) {
+        charFrequencyIndex += 1;
+      }
+    }
+
+    // The character has already appeared enough times.
+    if (charFrequencyIndex > countInSolution) {
+      return 'absent';
+    }
+
+    // Lookahead to see if later instances of the character are correct.
+    let state: TileState = 'present';
+    guess.split('').forEach((char, index) => {
+      if (char === ch && index > idx && includeAtIndex[index] === char) {
+        state = 'absent';
+      }
+    });
+
+    return state;
+  }
+
+  function checkCharacter(ch: string, idx: number) {
+    return (
+      exclude.includes(ch) ||
+      (includeAtIndex[idx] && includeAtIndex[idx] !== ch) ||
+      (excludeAtIndex[idx] && excludeAtIndex[idx] === ch)
+    );
+  }
+
+  function filterResults(word: string) {
+    if (word.split('').some(checkCharacter)) {
+      return false;
+    }
+
+    return include.every((ch) => word.includes(ch));
+  }
+
+  return {
+    filterResults,
+    getState,
   };
 }

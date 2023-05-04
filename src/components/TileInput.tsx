@@ -1,7 +1,7 @@
 import { forwardRef, HTMLProps } from 'react';
 import styled from 'styled-components';
 
-import Tile from './Tile';
+import Tile, { TileState } from './Tile';
 
 const $Container = styled.div`
   display: flex;
@@ -17,10 +17,13 @@ const $Input = styled.input<{ required?: boolean }>`
   font-weight: 700;
   outline: none;
   padding: 0.25rem 0.5rem;
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   text-align: center;
   text-transform: uppercase;
-  width: 50%;
   z-index: 1;
 
   ${({ required, theme }) => {
@@ -37,17 +40,21 @@ const $Input = styled.input<{ required?: boolean }>`
   }
 `;
 
-type InputProps = Omit<HTMLProps<HTMLInputElement>, 'as'>;
+interface InputProps extends Omit<HTMLProps<HTMLInputElement>, 'as'> {
+  state: TileState;
+}
 
-const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  return (
-    <$Container>
-      <$Input {...props} ref={ref} />
-      <Tile as={'input'} state="empty" />
-    </$Container>
-  );
-});
+const TileInput = forwardRef<HTMLInputElement, InputProps>(
+  ({ state, ...props }, ref) => {
+    return (
+      <$Container>
+        <$Input {...props} maxLength={1} ref={ref} />
+        <Tile state={state} />
+      </$Container>
+    );
+  }
+);
 
-Input.displayName = 'Input';
+TileInput.displayName = 'Input';
 
-export default Input;
+export default TileInput;
