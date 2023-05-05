@@ -39,9 +39,9 @@ const $Logo = styled.h1`
 const $Main = styled.main`
   display: flex;
   flex-direction: column;
-  max-width: 360px;
   margin: 0 auto;
-  padding: ${64 + HEADER_HEIGHT}px 0 64px;
+  min-width: 330px;
+  padding: ${32 + HEADER_HEIGHT}px 0 32px;
   text-align: center;
 `;
 

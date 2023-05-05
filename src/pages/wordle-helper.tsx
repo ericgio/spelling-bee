@@ -24,6 +24,13 @@ const $Solution = styled.div`
   margin: 1.5rem 0;
 `;
 
+const $RowButton = styled.a.attrs({
+  href: '#',
+  role: 'button',
+})`
+  text-decoration: none;
+`;
+
 const $Row = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -90,6 +97,13 @@ function WordleHelper() {
     fetchSolution();
   }, []);
 
+  const onSetGuess = React.useCallback(
+    (guess: string) => {
+      setGuesses([...guesses, guess]);
+    },
+    [guesses]
+  );
+
   const onKeyDown = React.useCallback(
     (e: KeyboardEvent) => {
       if (e.metaKey || e.altKey || e.ctrlKey) {
@@ -114,17 +128,18 @@ function WordleHelper() {
         guesses.length < MAX_GUESSES &&
         list.includes(value)
       ) {
-        setGuesses([...guesses, value]);
+        onSetGuess(value);
         setValue('');
       }
     },
-    [guesses, value]
+    [guesses, onSetGuess, value]
   );
 
   useOnKeyDown(onKeyDown);
 
   const { filterResults, getState } = wordleSolver(guesses, solution);
   const results = list.filter(filterResults);
+  const isPuzzleSolved = guesses.at(-1) === solution;
 
   return (
     <Page faviconSrc="/wordle-favicon.ico" title={TITLE}>
@@ -143,30 +158,46 @@ function WordleHelper() {
               ))}
             </$Row>
           ))}
-          {guesses.length < MAX_GUESSES && (
+          {guesses.length < MAX_GUESSES && !isPuzzleSolved && (
             <MultiInput onChange={(value) => setValue(value)} value={value} />
           )}
         </$Solution>
         {!!guesses.length && (
           <$Solution>
             <p>
-              {results.length} {results.length === 1 ? 'result' : 'results'}
+              {results.length}{' '}
+              {results.length === 1 ? 'possibility' : 'possibilities'} remaining
             </p>
-            {results.map((word) => (
-              <$Row key={word}>
-                {word.split('').map((char, idx) => (
-                  <Tile
-                    key={`${word}-${char}-${idx}`}
-                    state={
-                      solutions.find(({ solution }) => solution === word)
-                        ? 'correct'
-                        : 'tbd'
-                    }>
-                    {char}
-                  </Tile>
-                ))}
-              </$Row>
-            ))}
+            {results.map((word) => {
+              const isPastSolution = solutions.find(
+                ({ solution }) => solution === word
+              );
+
+              const row = (
+                <$Row key={word}>
+                  {word.split('').map((char, idx) => (
+                    <Tile
+                      key={`${word}-${idx}`}
+                      state={isPastSolution ? 'correct' : 'tbd'}>
+                      {char}
+                    </Tile>
+                  ))}
+                </$Row>
+              );
+
+              return !isPastSolution && !isPuzzleSolved ? (
+                <$RowButton
+                  key={word}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    !isPastSolution && !isPuzzleSolved && onSetGuess(word);
+                  }}>
+                  {row}
+                </$RowButton>
+              ) : (
+                row
+              );
+            })}
           </$Solution>
         )}
       </Page.Main>

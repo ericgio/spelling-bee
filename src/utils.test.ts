@@ -1,4 +1,5 @@
 import { isAlpha, wordleSolver } from './utils';
+import list from './data/wordle.json';
 
 it('checks whether a string contains only alphabetical characters', () => {
   expect(isAlpha('zsdfasdfzsdvzsdv')).toBe(true);
@@ -20,4 +21,16 @@ it('determines the state for each letter in a guess', () => {
       expect(getState(guess, idx)).toBe(expectedState[guessIdx][idx]);
     });
   });
+});
+
+it('tests the filtered words', () => {
+  const guesses = ['yuppy', 'puppy'];
+  const { filterResults } = wordleSolver(guesses, 'guppy');
+
+  expect(list.filter(filterResults)).toEqual([
+    'buppy',
+    'cuppy',
+    'duppy',
+    'guppy',
+  ]);
 });

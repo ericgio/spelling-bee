@@ -7,7 +7,7 @@ const $Container = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  width: 68px;
+  width: 62px;
 `;
 
 const $Input = styled.input<{ required?: boolean }>`

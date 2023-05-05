@@ -18,6 +18,8 @@ const LETTER_COUNT = 7;
 const TITLE = 'Spelling Bee Solver';
 
 const $Main = styled(Page.Main)`
+  max-width: 360px;
+
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}px) {
     max-width: 640px !important;
   }

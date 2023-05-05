@@ -57,7 +57,7 @@ export function sortSpellingBeeResults(letters: string[]) {
 export function wordleSolver(guesses: string[], solution: string) {
   const exclude: string[] = [];
   const include: string[] = [];
-  const excludeAtIndex: Record<number, string> = {};
+  const excludeAtIndex: Record<number, string[]> = {};
   const includeAtIndex: Record<number, string> = {};
 
   guesses.forEach((guess) => {
@@ -76,7 +76,9 @@ export function wordleSolver(guesses: string[], solution: string) {
 
       // Wrong location, possibly
       if (solution.includes(char)) {
-        excludeAtIndex[idx] = char;
+        excludeAtIndex[idx] = excludeAtIndex[idx]
+          ? [...excludeAtIndex[idx], char]
+          : [char];
       }
 
       // Valid letter, include.
@@ -127,16 +129,16 @@ export function wordleSolver(guesses: string[], solution: string) {
     return state;
   }
 
-  function checkCharacter(ch: string, idx: number) {
-    return (
-      exclude.includes(ch) ||
-      (includeAtIndex[idx] && includeAtIndex[idx] !== ch) ||
-      (excludeAtIndex[idx] && excludeAtIndex[idx] === ch)
-    );
-  }
-
   function filterResults(word: string) {
-    if (word.split('').some(checkCharacter)) {
+    if (
+      word.split('').some((ch: string, idx: number) => {
+        return (
+          exclude.includes(ch) ||
+          (includeAtIndex[idx] && includeAtIndex[idx] !== ch) ||
+          (excludeAtIndex[idx] && excludeAtIndex[idx].includes(ch))
+        );
+      })
+    ) {
       return false;
     }
 
