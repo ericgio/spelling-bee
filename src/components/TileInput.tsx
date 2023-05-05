@@ -13,17 +13,18 @@ const $Container = styled.div`
 const $Input = styled.input<{ required?: boolean }>`
   background-color: transparent;
   border: 0;
+  box-sizing: border-box;
   font-size: 1.5rem;
   font-weight: 700;
+  height: 100%;
   outline: none;
   padding: 0.25rem 0.5rem;
   position: absolute;
-  bottom: 0;
   top: 0;
   left: 0;
-  right: 0;
   text-align: center;
   text-transform: uppercase;
+  width: 100%;
   z-index: 1;
 
   ${({ required, theme }) => {
