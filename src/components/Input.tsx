@@ -14,6 +14,8 @@ const $Input = styled.input`
   padding: 0.5rem 0.75rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: 100%;
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
 
   &:focus {
     border-color: ${({ theme }) => theme.colors.wordle.green};
