@@ -56,10 +56,7 @@ function MultiInput(props: MultiInputProps) {
     // Focus the next or previous input when typing or deleting letters.
     if (props.value.length < LETTER_COUNT) {
       inputs[props.value.length].focus();
-      return;
     }
-
-    inputs[props.value.length - 1].blur();
   }, [props.value.length]);
 
   return (
