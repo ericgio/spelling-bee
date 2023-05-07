@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { format } from 'date-fns';
 import * as React from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import Page from '../components/Page';
-import Tile from '../components/Tile';
+import Tile, { TileState } from '../components/Tile';
 import TileInput from '../components/TileInput';
 
 import solutions from '../data/wordle-solutions.json';
@@ -65,6 +65,48 @@ const $TileInput = styled(TileInput)`
     animation: ${pop} 50ms linear 1;
   }
 `;
+
+const $Flipper = styled.div<{ $index: number }>`
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  transition-delay: ${({ $index }) => `${$index * 200}ms`};
+
+  &.animate {
+    transform: rotateX(180deg);
+  }
+`;
+
+const $Tile = styled(Tile)<{ $isFront?: boolean }>`
+  backface-visibility: hidden;
+  ${({ $isFront }) => !$isFront && 'position: absolute;'}
+  left: 0;
+  top: 0;
+  transform: rotateX(${({ $isFront }) => ($isFront ? 0 : 180)}deg);
+`;
+
+interface FlipTileProps extends React.HTMLProps<HTMLDivElement> {
+  index: number;
+  state: TileState;
+}
+
+function FlipTile(props: FlipTileProps) {
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    // Set the `animate` classname only after the component has mounted.
+    setMounted(true);
+  }, []);
+
+  return (
+    <$Flipper className={mounted ? 'animate' : ''} $index={props.index}>
+      <$Tile $isFront={true} state="tbd">
+        {props.children}
+      </$Tile>
+      <$Tile state={props.state}>{props.children}</$Tile>
+    </$Flipper>
+  );
+}
 
 const $Solution = styled.div`
   display: flex;
@@ -175,11 +217,12 @@ function WordleHelper() {
           {guesses.map((guess) => (
             <$Row key={guess}>
               {guess.split('').map((char, idx) => (
-                <Tile
+                <FlipTile
+                  index={idx}
                   key={`${guess}-${char}-${idx}`}
                   state={getState(guess, idx)}>
                   {char}
-                </Tile>
+                </FlipTile>
               ))}
             </$Row>
           ))}
