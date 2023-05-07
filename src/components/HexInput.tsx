@@ -22,10 +22,9 @@ const arrowStyles = css`
 `;
 
 const $Container = styled.div<{ required?: boolean }>`
-  aspect-ratio: 1.75/1;
+  height: fit-content;
   padding: ${ARROW_Y_SM}px 0;
   position: relative;
-  width: 68px;
 
   &:before {
     ${arrowStyles}
@@ -59,18 +58,22 @@ const $Input = styled.input<{ required?: boolean }>`
   background-color: ${({ theme, required }) =>
     required ? theme.colors.yellow : theme.colors.grey};
   border: 0;
-  box-sizing: border-box;
   font-size: 1.5rem;
   font-weight: 700;
   outline: none;
+  padding: 0;
   position: relative;
   text-align: center;
   text-transform: uppercase;
-  width: 100%;
   z-index: 1;
+
+  height: 28px;
+  width: 48px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}px) {
     font-size: 2rem;
+    height: 38px;
+    width: 68px;
   }
 `;
 
