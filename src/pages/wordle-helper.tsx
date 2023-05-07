@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { format } from 'date-fns';
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 import Page from '../components/Page';
 import Tile from '../components/Tile';
@@ -16,6 +16,43 @@ const LETTER_COUNT = 5;
 const MAX_DATE = format(new Date(), 'yyyy-MM-dd');
 const MAX_GUESSES = 6;
 const TITLE = 'Wordle Helper';
+
+const shake = keyframes`
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+`;
+
+const $Shake = styled.div`
+  &.animate {
+    animation: ${shake} 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+`;
+
+interface ShakeProps {
+  animate: boolean;
+  children: React.ReactNode;
+  onAnimationEnd: () => void;
+}
+
+function Shake({ animate, ...props }: ShakeProps) {
+  return <$Shake {...props} className={animate ? 'animate' : ''} />;
+}
 
 const $Solution = styled.div`
   display: flex;
@@ -73,6 +110,7 @@ function WordleHelper() {
   const [guesses, setGuesses] = React.useState<string[]>([]);
   const [solution, setSolution] = React.useState<string>('');
   const [value, setValue] = React.useState<string>('');
+  const [isInvalid, setIsInvalid] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     // Fetch today's solution
@@ -92,6 +130,7 @@ function WordleHelper() {
   );
 
   const onEnter = React.useCallback(() => {
+    // Validate guesses
     if (
       value.length === LETTER_COUNT &&
       guesses.length < MAX_GUESSES &&
@@ -99,7 +138,11 @@ function WordleHelper() {
     ) {
       onSetGuess(value);
       setValue('');
+      return;
     }
+
+    // Feedback animation if guess is invalid.
+    setIsInvalid(true);
   }, [guesses.length, onSetGuess, value]);
 
   const onChange = React.useCallback((value: string) => {
@@ -128,7 +171,11 @@ function WordleHelper() {
             </$Row>
           ))}
           {guesses.length < MAX_GUESSES && !isPuzzleSolved && (
-            <MultiInput onChange={onChange} onEnter={onEnter} value={value} />
+            <Shake
+              animate={isInvalid}
+              onAnimationEnd={() => setIsInvalid(false)}>
+              <MultiInput onChange={onChange} onEnter={onEnter} value={value} />
+            </Shake>
           )}
         </$Solution>
         {!!guesses.length && (
