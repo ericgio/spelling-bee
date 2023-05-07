@@ -54,6 +54,18 @@ function Shake({ animate, ...props }: ShakeProps) {
   return <$Shake {...props} className={animate ? 'animate' : ''} />;
 }
 
+const pop = keyframes`
+  50%  {
+    transform: scale(1.1);
+  }
+`;
+
+const $TileInput = styled(TileInput)`
+  &.animate {
+    animation: ${pop} 50ms linear 1;
+  }
+`;
+
 const $Solution = styled.div`
   display: flex;
   flex-direction: column;
@@ -90,7 +102,8 @@ function MultiInput({ disabled, ...props }: MultiInputProps) {
         const value = props.value[idx] || '';
 
         return (
-          <TileInput
+          <$TileInput
+            className={value ? 'animate' : ''}
             key={idx}
             maxLength={1}
             onChange={() => {

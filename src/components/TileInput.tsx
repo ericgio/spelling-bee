@@ -37,13 +37,14 @@ const $Input = styled.input<{ required?: boolean }>`
 `;
 
 interface InputProps extends Omit<HTMLProps<HTMLInputElement>, 'as'> {
+  className?: string;
   state: TileState;
 }
 
 const TileInput = forwardRef<HTMLInputElement, InputProps>(
-  ({ state, ...props }, ref) => {
+  ({ className, state, ...props }, ref) => {
     return (
-      <$Container>
+      <$Container className={className}>
         <$Input {...props} maxLength={1} ref={ref} />
         <Tile state={state} />
       </$Container>
