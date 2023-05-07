@@ -14,11 +14,11 @@ const $Input = styled.input<{ required?: boolean }>`
   background-color: transparent;
   border: 0;
   box-sizing: border-box;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
   height: 100%;
   outline: none;
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -34,11 +34,6 @@ const $Input = styled.input<{ required?: boolean }>`
       `;
     }
   }}
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}px) {
-    font-size: 2rem;
-    padding: 0.5rem;
-  }
 `;
 
 interface InputProps extends Omit<HTMLProps<HTMLInputElement>, 'as'> {

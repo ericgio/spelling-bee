@@ -9,8 +9,8 @@ import TileInput from '../components/TileInput';
 
 import solutions from '../data/wordle-solutions.json';
 import list from '../data/wordle.json';
-import { useOnKeyDown } from '../hooks';
-import { isLetter, wordleSolver } from '../utils';
+import { useMultiInput, UseMultiInputOptions } from '../hooks';
+import { wordleSolver } from '../utils';
 
 const LETTER_COUNT = 5;
 const MAX_DATE = format(new Date(), 'yyyy-MM-dd');
@@ -37,39 +37,29 @@ const $Row = styled.div`
   grid-gap: 5px;
 `;
 
-interface MultiInputProps {
+interface MultiInputProps extends Omit<UseMultiInputOptions, 'count'> {
   disabled?: boolean;
-  onChange: (value: string) => void;
-  value: string;
 }
 
-function MultiInput(props: MultiInputProps) {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    if (!containerRef.current) {
-      return;
-    }
-
-    const inputs = containerRef.current.querySelectorAll('input');
-
-    // Focus the next or previous input when typing or deleting letters.
-    if (props.value.length < LETTER_COUNT) {
-      inputs[props.value.length].focus();
-    }
-  }, [props.value.length]);
+function MultiInput({ disabled, ...props }: MultiInputProps) {
+  const containerRef = useMultiInput({
+    ...props,
+    count: LETTER_COUNT,
+  });
 
   return (
     <$Row ref={containerRef}>
       {Array.from(Array(LETTER_COUNT).keys()).map((idx) => {
         const value = props.value[idx] || '';
+
         return (
           <TileInput
             key={idx}
+            maxLength={1}
             onChange={() => {
               // No-op to avoid React warning.
             }}
-            readOnly={props.disabled}
+            readOnly={disabled}
             state={value ? 'tbd' : 'empty'}
             value={value}
           />
@@ -101,38 +91,20 @@ function WordleHelper() {
     [guesses]
   );
 
-  const onKeyDown = React.useCallback(
-    (e: KeyboardEvent) => {
-      if (e.metaKey || e.altKey || e.ctrlKey) {
-        return;
-      }
+  const onEnter = React.useCallback(() => {
+    if (
+      value.length === LETTER_COUNT &&
+      guesses.length < MAX_GUESSES &&
+      list.includes(value)
+    ) {
+      onSetGuess(value);
+      setValue('');
+    }
+  }, [guesses.length, onSetGuess, value]);
 
-      const char = e.key.toLowerCase();
-
-      if (isLetter(char) && value.length < LETTER_COUNT) {
-        setValue(value + char);
-        return;
-      }
-
-      if (e.key === 'Backspace') {
-        setValue(value.slice(0, -1));
-        return;
-      }
-
-      if (
-        e.key === 'Enter' &&
-        value.length === LETTER_COUNT &&
-        guesses.length < MAX_GUESSES &&
-        list.includes(value)
-      ) {
-        onSetGuess(value);
-        setValue('');
-      }
-    },
-    [guesses, onSetGuess, value]
-  );
-
-  useOnKeyDown(onKeyDown);
+  const onChange = React.useCallback((value: string) => {
+    setValue(value);
+  }, []);
 
   const { filterResults, getState } = wordleSolver(guesses, solution);
   const results = list.filter(filterResults);
@@ -156,7 +128,7 @@ function WordleHelper() {
             </$Row>
           ))}
           {guesses.length < MAX_GUESSES && !isPuzzleSolved && (
-            <MultiInput onChange={(value) => setValue(value)} value={value} />
+            <MultiInput onChange={onChange} onEnter={onEnter} value={value} />
           )}
         </$Solution>
         {!!guesses.length && (

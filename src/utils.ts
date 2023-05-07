@@ -1,14 +1,15 @@
 import words from './data/spellingBee.json';
 import { TileState } from './components/Tile';
 
-/**
- * De-dupes the string entries in a flat array.
- */
-export function dedupeArray(arr: string[]) {
+function dedupeArray(arr: string[]) {
   return Array.from(new Set(arr));
 }
 
-export function getSortedSpellingBeeResults(letters: string[]) {
+export function dedupeString(value: string) {
+  return dedupeArray(value.split('')).join('');
+}
+
+export function getSortedSpellingBeeResults(letters: string) {
   const results = words.filter((word) => {
     // Filter out words that don't inckude the required letter.
     if (!word.includes(letters[0])) {
@@ -36,11 +37,11 @@ export function isLetter(char: string) {
   return /^[a-z]$/i.test(char);
 }
 
-export function isPangram(letters: string[], result: string) {
-  return letters.every((ch) => result.indexOf(ch) > -1);
+export function isPangram(letters: string, result: string) {
+  return letters.split('').every((ch) => result.indexOf(ch) > -1);
 }
 
-export function sortSpellingBeeResults(letters: string[]) {
+export function sortSpellingBeeResults(letters: string) {
   return (r1: string, r2: string) => {
     if (r1 < r2 || (isPangram(letters, r1) && !isPangram(letters, r2))) {
       return -1;

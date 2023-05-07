@@ -5,14 +5,9 @@ import Button from '../components/Button';
 import HexInput from '../components/HexInput';
 import Page from '../components/Page';
 
-import {
-  dedupeArray,
-  getSortedSpellingBeeResults,
-  isLetter,
-  isPangram,
-} from '../utils';
+import { dedupeString, getSortedSpellingBeeResults, isPangram } from '../utils';
 
-import { useOnKeyDown, useOnPaste } from '../hooks';
+import { useMultiInput, UseMultiInputOptions } from '../hooks';
 
 const LETTER_COUNT = 7;
 const TITLE = 'Spelling Bee Solver';
@@ -65,30 +60,15 @@ const $Item = styled.li<{ $isPangram?: boolean }>`
   text-transform: capitalize;
 `;
 
-interface LetterInputProps
-  extends Omit<React.HTMLProps<HTMLInputElement>, 'onChange' | 'value'> {
-  onChange: (value: string[]) => void;
-  value: string[];
+interface MultiInputProps extends Omit<UseMultiInputOptions, 'count'> {
+  disabled?: boolean;
 }
 
-function LetterInput(props: LetterInputProps) {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    if (!containerRef.current) {
-      return;
-    }
-
-    const inputs = containerRef.current.querySelectorAll('input');
-
-    // Focus the next or previous input when typing or deleting letters.
-    if (props.value.length < LETTER_COUNT) {
-      inputs[props.value.length].focus();
-      return;
-    }
-
-    inputs[props.value.length - 1].blur();
-  }, [props.value.length]);
+function MultiInput({ disabled, ...props }: MultiInputProps) {
+  const containerRef = useMultiInput({
+    ...props,
+    count: LETTER_COUNT,
+  });
 
   return (
     <$InputContainer ref={containerRef}>
@@ -99,7 +79,7 @@ function LetterInput(props: LetterInputProps) {
           onChange={() => {
             // No-op to avoid React warning.
           }}
-          readOnly={props.disabled}
+          readOnly={disabled}
           required={idx === 0}
           value={props.value[idx] || ''}
         />
@@ -110,55 +90,16 @@ function LetterInput(props: LetterInputProps) {
 
 function Home() {
   const [showResults, setShowResults] = React.useState(false);
-  const [letters, setLetters] = React.useState<string[]>([]);
+  const [value, setValue] = React.useState<string>('');
 
-  const onKeyDown = React.useCallback(
-    (e: KeyboardEvent) => {
-      if (showResults) {
-        return;
-      }
-
-      if (e.metaKey || e.altKey || e.ctrlKey) {
-        return;
-      }
-
-      const char = e.key.toLowerCase();
-
-      if (
-        isLetter(char) &&
-        letters.length < LETTER_COUNT &&
-        !letters.includes(char)
-      ) {
-        setLetters([...letters, char]);
-      }
-
-      if (e.key === 'Backspace') {
-        setLetters(letters.slice(0, -1));
+  const onChange = React.useCallback(
+    (value: string) => {
+      if (!showResults) {
+        setValue(dedupeString(value));
       }
     },
-    [letters, setLetters, showResults]
+    [showResults]
   );
-
-  useOnKeyDown(onKeyDown);
-
-  const onPaste = React.useCallback(
-    (e: ClipboardEvent) => {
-      const pastedStr = e.clipboardData?.getData('Text').toLowerCase();
-
-      if (showResults || !pastedStr) {
-        return;
-      }
-
-      const newLetters = dedupeArray(pastedStr.split(''))
-        .filter(isLetter)
-        .slice(0, LETTER_COUNT);
-
-      setLetters(newLetters);
-    },
-    [setLetters, showResults]
-  );
-
-  useOnPaste(onPaste);
 
   function onSubmit() {
     setShowResults(true);
@@ -166,29 +107,29 @@ function Home() {
 
   function onReset() {
     setShowResults(false);
-    setLetters([]);
+    setValue('');
   }
 
-  const results = showResults ? getSortedSpellingBeeResults(letters) : [];
+  const results = showResults ? getSortedSpellingBeeResults(value) : [];
 
   return (
     <Page faviconSrc="/spelling-bee-favicon.ico" title={TITLE}>
       <$Main>
         <Page.Title icon="spelling-bee">{TITLE}</Page.Title>
         <p>Enter today{'’'}s letters</p>
-        <LetterInput
+        <MultiInput
           disabled={!!results.length}
-          onChange={setLetters}
-          value={letters}
+          onChange={onChange}
+          value={value}
         />
         <$ButtonGroup>
           <Button
             $primary
-            disabled={letters.length !== LETTER_COUNT}
+            disabled={value.length !== LETTER_COUNT}
             onClick={onSubmit}>
             Solve
           </Button>
-          <Button disabled={!letters.length} onClick={onReset}>
+          <Button disabled={!value.length} onClick={onReset}>
             Reset
           </Button>
         </$ButtonGroup>
@@ -197,7 +138,7 @@ function Home() {
             <p>{results.length} words</p>
             <$List>
               {results.map((result) => (
-                <$Item $isPangram={isPangram(letters, result)} key={result}>
+                <$Item $isPangram={isPangram(value, result)} key={result}>
                   {result}
                 </$Item>
               ))}
