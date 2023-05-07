@@ -23,8 +23,8 @@ const $Main = styled(Page.Main)`
 const $InputContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
-  margin: 2rem 0;
+  gap: 0.25rem;
+  margin: 1rem 0 2rem;
   user-select: none;
 `;
 

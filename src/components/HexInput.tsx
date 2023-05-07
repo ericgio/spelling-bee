@@ -1,75 +1,89 @@
 import { forwardRef, HTMLProps } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const $Container = styled.div`
-  display: flex;
-  justify-content: center;
-  position: relative;
-  width: 68px;
-`;
+const ARROW_Y_LG = 20;
+const ARROW_Y_SM = 14;
+const ARROW_X_LG = 34;
+const ARROW_X_SM = 24;
 
-const $Hex = styled.div<{ $required?: boolean }>`
-  color: ${({ theme, $required }) =>
-    $required ? theme.colors.yellow : theme.colors.grey};
-  font-size: 84px;
-  line-height: 0.35;
+const arrowStyles = css`
+  border-left: ${ARROW_X_SM}px solid transparent;
+  border-right: ${ARROW_X_SM}px solid transparent;
+  content: '';
+  height: 0;
   position: absolute;
-  left: -6px;
-  top: 0;
+  left: 0;
+  width: 0;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}px) {
-    font-size: 125px;
-    left: -8px;
-    top: 1px;
+    border-left-width: ${ARROW_X_LG}px;
+    border-right-width: ${ARROW_X_LG}px;
+  }
+`;
+
+const $Container = styled.div<{ required?: boolean }>`
+  aspect-ratio: 1.75/1;
+  padding: ${ARROW_Y_SM}px 0;
+  position: relative;
+  width: 68px;
+
+  &:before {
+    ${arrowStyles}
+    border-bottom: ${ARROW_Y_SM}px solid ${({ theme, required }) =>
+      required ? theme.colors.yellow : theme.colors.grey};
+    top: 0;
+  }
+
+  &:after {
+    ${arrowStyles}
+    border-top: ${ARROW_Y_SM}px solid ${({ theme, required }) =>
+      required ? theme.colors.yellow : theme.colors.grey};
+    bottom: 0;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}px) {
+    padding: ${ARROW_Y_LG}px 0;
+
+    &:before {
+      border-bottom-width: ${ARROW_Y_LG}px;
+    }
+
+    &:after {
+      border-top-width: ${ARROW_Y_LG}px;
+    }
   }
 `;
 
 const $Input = styled.input<{ required?: boolean }>`
   background-color: transparent;
+  background-color: ${({ theme, required }) =>
+    required ? theme.colors.yellow : theme.colors.grey};
   border: 0;
+  box-sizing: border-box;
   font-size: 1.5rem;
   font-weight: 700;
   outline: none;
-  padding: 0.25rem 0.5rem;
   position: relative;
   text-align: center;
   text-transform: uppercase;
-  width: 50%;
+  width: 100%;
   z-index: 1;
-
-  ${({ required, theme }) => {
-    if (required) {
-      return `
-        color: ${theme.colors.black};
-      `;
-    }
-  }}
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}px) {
     font-size: 2rem;
-    padding: 0.5rem;
   }
 `;
 
-interface HexProps {
-  required?: boolean;
-}
+type HexInputProps = Omit<HTMLProps<HTMLInputElement>, 'as'>;
 
-function Hex(props: HexProps) {
-  return <$Hex $required={props.required}>&#x2B22;</$Hex>;
-}
-
-type InputProps = Omit<HTMLProps<HTMLInputElement>, 'as'>;
-
-const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+const HexInput = forwardRef<HTMLInputElement, HexInputProps>((props, ref) => {
   return (
-    <$Container>
+    <$Container required={props.required}>
       <$Input {...props} ref={ref} />
-      <Hex required={props.required} />
     </$Container>
   );
 });
 
-Input.displayName = 'Input';
+HexInput.displayName = 'Input';
 
-export default Input;
+export default HexInput;
