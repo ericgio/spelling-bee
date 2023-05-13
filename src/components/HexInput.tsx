@@ -54,6 +54,7 @@ const $Container = styled.div<{ required?: boolean }>`
 `;
 
 const $Input = styled.input<{ required?: boolean }>`
+  appearance: none;
   background-color: transparent;
   background-color: ${({ theme, required }) =>
     required ? theme.colors.yellow : theme.colors.grey};
