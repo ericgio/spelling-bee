@@ -1,6 +1,5 @@
 const axios = require('axios');
 const { addDays, format, parseISO } = require('date-fns');
-const fs = require('fs');
 
 const wordleSolutions = require('../data/wordle-solutions.json');
 
@@ -9,7 +8,7 @@ const MIN_DATE = '2021-06-19';
 
 const API_URL = 'https://www.nytimes.com/svc/wordle/v2';
 
-async function fetchAllSolutions() {
+async function fetchWordleSolutions() {
   const solutions = wordleSolutions || [];
 
   let date = MIN_DATE;
@@ -33,9 +32,4 @@ async function fetchAllSolutions() {
   return solutions;
 }
 
-fetchAllSolutions().then((solutions) => {
-  fs.writeFileSync(
-    './src/data/wordle-solutions.json',
-    JSON.stringify(solutions)
-  );
-});
+module.exports = fetchWordleSolutions;

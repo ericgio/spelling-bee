@@ -7,9 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen": "yarn normalize && yarn filter",
-    "filter": "node ./src/scripts/filterWords.js",
-    "normalize": "node ./src/scripts/normalizeLists.js"
+    "build-data": "node ./src/scripts/build-data.js && yarn prettier --write './src/data/*.json'"
   },
   "dependencies": {
     "@types/node": "18.15.11",
@@ -32,6 +30,7 @@
     "@types/qs": "^6.9.7",
     "@types/styled-components": "^5.1.26",
     "jest": "^29.5.0",
-    "jest-environment-jsdom": "^29.5.0"
+    "jest-environment-jsdom": "^29.5.0",
+    "prettier": "^2.8.8"
   }
 }

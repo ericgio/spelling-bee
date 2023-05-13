@@ -4806,5 +4806,40 @@
     "print_date": "2023-05-06",
     "days_since_launch": 686,
     "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1663,
+    "solution": "ghoul",
+    "print_date": "2023-05-07",
+    "days_since_launch": 687,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1265,
+    "solution": "aglow",
+    "print_date": "2023-05-08",
+    "days_since_launch": 688,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1530,
+    "solution": "cocoa",
+    "print_date": "2023-05-09",
+    "days_since_launch": 689,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1660,
+    "solution": "ethic",
+    "print_date": "2023-05-10",
+    "days_since_launch": 690,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1476,
+    "solution": "broom",
+    "print_date": "2023-05-11",
+    "days_since_launch": 691,
+    "editor": "Tracy Bennett"
   }
 ]
