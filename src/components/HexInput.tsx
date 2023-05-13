@@ -53,11 +53,14 @@ const $Container = styled.div<{ required?: boolean }>`
   }
 `;
 
-const $Input = styled.input<{ required?: boolean }>`
-  appearance: none;
-  background-color: transparent;
+const $InputContainer = styled.div<{ required?: boolean }>`
   background-color: ${({ theme, required }) =>
     required ? theme.colors.yellow : theme.colors.grey};
+`;
+
+const $Input = styled.input`
+  appearance: none;
+  background-color: transparent;
   border: 0;
   font-size: 1.5rem;
   font-weight: 700;
@@ -83,7 +86,9 @@ type HexInputProps = Omit<HTMLProps<HTMLInputElement>, 'as'>;
 const HexInput = forwardRef<HTMLInputElement, HexInputProps>((props, ref) => {
   return (
     <$Container required={props.required}>
-      <$Input {...props} ref={ref} />
+      <$InputContainer required={props.required}>
+        <$Input {...props} ref={ref} />
+      </$InputContainer>
     </$Container>
   );
 });
