@@ -63,7 +63,7 @@ function getValidatedDate(e: React.ChangeEvent<HTMLInputElement>) {
   return value;
 }
 
-function Wordle() {
+function WordleSolutions() {
   const [data, setData] = React.useState<WordleData | null>(null);
   const [date, setDate] = React.useState<string>(MAX_DATE);
 
@@ -117,4 +117,4 @@ function Wordle() {
   );
 }
 
-export default Wordle;
+export default WordleSolutions;

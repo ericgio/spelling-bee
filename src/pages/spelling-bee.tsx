@@ -88,7 +88,7 @@ function MultiInput({ disabled, ...props }: MultiInputProps) {
   );
 }
 
-function Home() {
+function SpellingBee() {
   const [showResults, setShowResults] = React.useState(false);
   const [value, setValue] = React.useState<string>('');
 
@@ -150,4 +150,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default SpellingBee;
