@@ -22,6 +22,8 @@ const spellingBee = rawArr.filter(
     // Valid words are between 3 and 20 letters
     word.length > 3 &&
     word.length < 20 &&
+    // The letter 'S' is always excluded
+    !word.includes('s') &&
     // Only include curated words
     !blacklistArr.includes(word)
 );
