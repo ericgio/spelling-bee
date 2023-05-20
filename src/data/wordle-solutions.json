@@ -4876,5 +4876,19 @@
     "print_date": "2023-05-16",
     "days_since_launch": 696,
     "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1636,
+    "solution": "plank",
+    "print_date": "2023-05-17",
+    "days_since_launch": 697,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2106,
+    "solution": "shorn",
+    "print_date": "2023-05-18",
+    "days_since_launch": 698,
+    "editor": "Tracy Bennett"
   }
 ]
