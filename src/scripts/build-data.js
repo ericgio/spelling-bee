@@ -1,10 +1,12 @@
 const fs = require('fs');
 
 const fetchWordleSolutions = require('./fetchWordleSolutions');
-const getSpellingBeeBlacklistToday = require('./getSpellingBeeBlacklist');
+const getSpellingBeeBlacklist = require('./getSpellingBeeBlacklist');
+
+const blacklist = require('../data/sb-blacklist.json');
 
 function normalizeArray(arr) {
-  return arr
+  return Array.from(new Set(arr))
     .map((word) => word.toLowerCase())
     .filter((word) => !!word)
     .sort();
@@ -12,15 +14,12 @@ function normalizeArray(arr) {
 
 async function buildData() {
   // Read .txt files, convert to array, and normalize.
-  const rawStr = fs.readFileSync('./src/data/raw.txt', 'utf8');
-  const rawArr = normalizeArray(rawStr.split('\r\n'));
+  // const rawStr = fs.readFileSync('./src/data/raw.txt', 'utf8');
+  // const rawArr = normalizeArray(rawStr.split('\r\n'));
 
-  // Fethc today's answer's and diff against the generated list.
-  const blacklist = await getSpellingBeeBlacklistToday();
-  fs.appendFileSync('./src/data/sb-blacklist.txt', blacklist.join('\n'));
-
-  const blacklistStr = fs.readFileSync('./src/data/sb-blacklist.txt', 'utf8');
-  const blacklistArr = normalizeArray(blacklistStr.split('\n'));
+  // Fetch today's Spelling Bee answers and diff against the generated list.
+  const dailyBlacklist = await getSpellingBeeBlacklist();
+  const blacklistArr = normalizeArray([...blacklist, ...dailyBlacklist]);
 
   // Create word lists for Spelling Bee & Wordle.
   const spellingBee = rawArr.filter(
@@ -37,7 +36,7 @@ async function buildData() {
   const wordle = rawArr.filter((word) => word.length === 5);
 
   // Write data to .json files
-  fs.writeFileSync('./src/data/raw.json', JSON.stringify(rawArr));
+  // fs.writeFileSync('./src/data/raw.json', JSON.stringify(rawArr));
   fs.writeFileSync(
     './src/data/sb-blacklist.json',
     JSON.stringify(blacklistArr)
