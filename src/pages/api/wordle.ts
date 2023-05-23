@@ -5,7 +5,7 @@ import solutions from '../../data/wordle-solutions.json';
 
 const API_URL = 'https://www.nytimes.com/svc/wordle/v2';
 
-async function getSolution(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { date } = req.query;
 
   let solution = solutions.find((s) => s.print_date === date);
@@ -18,4 +18,4 @@ async function getSolution(req: NextApiRequest, res: NextApiResponse) {
   res.status(200).json(solution);
 }
 
-export default getSolution;
+export default handler;
