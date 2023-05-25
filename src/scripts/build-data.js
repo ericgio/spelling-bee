@@ -3,6 +3,7 @@ const fs = require('fs');
 const fetchWordleSolutions = require('./fetchWordleSolutions');
 const getSpellingBeeBlacklist = require('./getSpellingBeeBlacklist');
 
+const raw = require('../data/raw.json');
 const blacklist = require('../data/sb-blacklist.json');
 
 function normalizeArray(arr) {
@@ -22,7 +23,7 @@ async function buildData() {
   const blacklistArr = normalizeArray([...blacklist, ...dailyBlacklist]);
 
   // Create word lists for Spelling Bee & Wordle.
-  const spellingBee = rawArr.filter(
+  const spellingBee = raw.filter(
     (word) =>
       // Valid words are between 3 and 20 letters
       word.length > 3 &&
@@ -33,7 +34,7 @@ async function buildData() {
       !blacklistArr.includes(word)
   );
 
-  const wordle = rawArr.filter((word) => word.length === 5);
+  const wordle = raw.filter((word) => word.length === 5);
 
   // Write data to .json files
   // fs.writeFileSync('./src/data/raw.json', JSON.stringify(rawArr));
