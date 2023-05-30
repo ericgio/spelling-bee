@@ -15,15 +15,25 @@ function getSpellingBeeResults(letters) {
   });
 }
 
+function getBlacklistedWordsForPuzzle({ answers, validLetters }) {
+  const superset = getSpellingBeeResults(validLetters);
+  return superset.filter((word) => !answers.includes(word));
+}
+
+/**
+ * Cross-reference answers with master list to see any need to be added.
+ */
+function getMissingAnswers({ answers }) {
+  return answers.filter((answer) => !words.includes(answer));
+}
+
 /**
  * Get the blacklisted
  */
 async function getSpellingBeeBlacklist() {
-  const { data } = await axios.get(
-    'https://www.nytimes.com/puzzles/spelling-bee'
-  );
+  const res = await axios.get('https://www.nytimes.com/puzzles/spelling-bee');
 
-  const $ = load(data);
+  const $ = load(res.data);
 
   let gameData = '';
   $('script').each((_, elem) => {
@@ -33,11 +43,19 @@ async function getSpellingBeeBlacklist() {
     }
   });
 
-  const { answers, centerLetter, outerLetters } = JSON.parse(gameData).today;
-  const letters = [centerLetter, ...outerLetters].join('');
+  const { lastWeek = [], thisWeek = [] } = JSON.parse(gameData).pastPuzzles;
 
-  const superset = getSpellingBeeResults(letters);
-  return superset.filter((word) => !answers.includes(word));
+  // Generate blacklist for available data and cross-check answers for any that
+  // are missing from master list.
+  let blacklist = [];
+  let whitelist = [];
+
+  [...lastWeek, ...thisWeek].forEach((puzzle) => {
+    blacklist = [...blacklist, ...getBlacklistedWordsForPuzzle(puzzle)];
+    whitelist = [...whitelist, ...getMissingAnswers(puzzle)];
+  });
+
+  return { blacklist, whitelist };
 }
 
 module.exports = getSpellingBeeBlacklist;

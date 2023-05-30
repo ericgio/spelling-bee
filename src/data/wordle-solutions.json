@@ -4925,5 +4925,40 @@
     "print_date": "2023-05-23",
     "days_since_launch": 703,
     "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1493,
+    "solution": "utter",
+    "print_date": "2023-05-24",
+    "days_since_launch": 704,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1682,
+    "solution": "bagel",
+    "print_date": "2023-05-25",
+    "days_since_launch": 705,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 562,
+    "solution": "swine",
+    "print_date": "2023-05-26",
+    "days_since_launch": 706,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1146,
+    "solution": "ramen",
+    "print_date": "2023-05-27",
+    "days_since_launch": 707,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 528,
+    "solution": "skimp",
+    "print_date": "2023-05-28",
+    "days_since_launch": 708,
+    "editor": "Tracy Bennett"
   }
 ]
