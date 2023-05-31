@@ -4960,5 +4960,19 @@
     "print_date": "2023-05-28",
     "days_since_launch": 708,
     "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1331,
+    "solution": "mouse",
+    "print_date": "2023-05-29",
+    "days_since_launch": 709,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 755,
+    "solution": "kneel",
+    "print_date": "2023-05-30",
+    "days_since_launch": 710,
+    "editor": "Tracy Bennett"
   }
 ]
