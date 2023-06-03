@@ -4974,5 +4974,19 @@
     "print_date": "2023-05-30",
     "days_since_launch": 710,
     "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1222,
+    "solution": "agile",
+    "print_date": "2023-05-31",
+    "days_since_launch": 711,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1714,
+    "solution": "jazzy",
+    "print_date": "2023-06-01",
+    "days_since_launch": 712,
+    "editor": "Tracy Bennett"
   }
 ]
