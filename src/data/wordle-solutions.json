@@ -4988,5 +4988,26 @@
     "print_date": "2023-06-01",
     "days_since_launch": 712,
     "editor": "Tracy Bennett"
+  },
+  {
+    "id": 657,
+    "solution": "humid",
+    "print_date": "2023-06-02",
+    "days_since_launch": 713,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 613,
+    "solution": "nanny",
+    "print_date": "2023-06-03",
+    "days_since_launch": 714,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1491,
+    "solution": "beast",
+    "print_date": "2023-06-04",
+    "days_since_launch": 715,
+    "editor": "Tracy Bennett"
   }
 ]
