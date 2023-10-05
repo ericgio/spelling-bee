@@ -74,7 +74,7 @@ function Home() {
             src="/spelling-bee.svg"
           />
           <GameCard
-            description="Every Wordle solution by day."
+            description="Every Wordle solution."
             href="/wordle-solutions"
             name="Wordle Solutions"
             src="/wordle.svg"
