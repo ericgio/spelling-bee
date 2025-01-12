@@ -8726,5 +8726,397 @@
     "print_date": "2024-11-16",
     "days_since_launch": 1246,
     "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1659,
+    "solution": "tally",
+    "print_date": "2024-11-17",
+    "days_since_launch": 1247,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1860,
+    "solution": "frail",
+    "print_date": "2024-11-18",
+    "days_since_launch": 1248,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2230,
+    "solution": "going",
+    "print_date": "2024-11-19",
+    "days_since_launch": 1249,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1921,
+    "solution": "niche",
+    "print_date": "2024-11-20",
+    "days_since_launch": 1250,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1826,
+    "solution": "spine",
+    "print_date": "2024-11-21",
+    "days_since_launch": 1251,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 995,
+    "solution": "pearl",
+    "print_date": "2024-11-22",
+    "days_since_launch": 1252,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1098,
+    "solution": "jelly",
+    "print_date": "2024-11-23",
+    "days_since_launch": 1253,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1891,
+    "solution": "twist",
+    "print_date": "2024-11-24",
+    "days_since_launch": 1254,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2198,
+    "solution": "brown",
+    "print_date": "2024-11-25",
+    "days_since_launch": 1255,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2143,
+    "solution": "witch",
+    "print_date": "2024-11-26",
+    "days_since_launch": 1256,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1169,
+    "solution": "slang",
+    "print_date": "2024-11-27",
+    "days_since_launch": 1257,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1882,
+    "solution": "chock",
+    "print_date": "2024-11-28",
+    "days_since_launch": 1258,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1431,
+    "solution": "hippo",
+    "print_date": "2024-11-29",
+    "days_since_launch": 1259,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1422,
+    "solution": "dogma",
+    "print_date": "2024-11-30",
+    "days_since_launch": 1260,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2020,
+    "solution": "mauve",
+    "print_date": "2024-12-01",
+    "days_since_launch": 1261,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 563,
+    "solution": "guile",
+    "print_date": "2024-12-02",
+    "days_since_launch": 1262,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1364,
+    "solution": "shaky",
+    "print_date": "2024-12-03",
+    "days_since_launch": 1263,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1303,
+    "solution": "crypt",
+    "print_date": "2024-12-04",
+    "days_since_launch": 1264,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2044,
+    "solution": "endow",
+    "print_date": "2024-12-05",
+    "days_since_launch": 1265,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1232,
+    "solution": "shove",
+    "print_date": "2024-12-06",
+    "days_since_launch": 1266,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1664,
+    "solution": "hilly",
+    "print_date": "2024-12-07",
+    "days_since_launch": 1267,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1807,
+    "solution": "hyena",
+    "print_date": "2024-12-08",
+    "days_since_launch": 1268,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2021,
+    "solution": "flung",
+    "print_date": "2024-12-09",
+    "days_since_launch": 1269,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 655,
+    "solution": "patio",
+    "print_date": "2024-12-10",
+    "days_since_launch": 1270,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1797,
+    "solution": "plumb",
+    "print_date": "2024-12-11",
+    "days_since_launch": 1271,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1428,
+    "solution": "vying",
+    "print_date": "2024-12-12",
+    "days_since_launch": 1272,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1203,
+    "solution": "boxer",
+    "print_date": "2024-12-13",
+    "days_since_launch": 1273,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1301,
+    "solution": "drool",
+    "print_date": "2024-12-14",
+    "days_since_launch": 1274,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1793,
+    "solution": "funky",
+    "print_date": "2024-12-15",
+    "days_since_launch": 1275,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1909,
+    "solution": "boast",
+    "print_date": "2024-12-16",
+    "days_since_launch": 1276,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1859,
+    "solution": "scowl",
+    "print_date": "2024-12-17",
+    "days_since_launch": 1277,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1503,
+    "solution": "hefty",
+    "print_date": "2024-12-18",
+    "days_since_launch": 1278,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 574,
+    "solution": "stray",
+    "print_date": "2024-12-19",
+    "days_since_launch": 1279,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1572,
+    "solution": "flash",
+    "print_date": "2024-12-20",
+    "days_since_launch": 1280,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2047,
+    "solution": "blade",
+    "print_date": "2024-12-21",
+    "days_since_launch": 1281,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 685,
+    "solution": "brawn",
+    "print_date": "2024-12-22",
+    "days_since_launch": 1282,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1055,
+    "solution": "sauna",
+    "print_date": "2024-12-23",
+    "days_since_launch": 1283,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 645,
+    "solution": "eagle",
+    "print_date": "2024-12-24",
+    "days_since_launch": 1284,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 979,
+    "solution": "share",
+    "print_date": "2024-12-25",
+    "days_since_launch": 1285,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2014,
+    "solution": "affix",
+    "print_date": "2024-12-26",
+    "days_since_launch": 1286,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1982,
+    "solution": "grain",
+    "print_date": "2024-12-27",
+    "days_since_launch": 1287,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2202,
+    "solution": "decry",
+    "print_date": "2024-12-28",
+    "days_since_launch": 1288,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2000,
+    "solution": "mambo",
+    "print_date": "2024-12-29",
+    "days_since_launch": 1289,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 890,
+    "solution": "stare",
+    "print_date": "2024-12-30",
+    "days_since_launch": 1290,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1289,
+    "solution": "lemur",
+    "print_date": "2024-12-31",
+    "days_since_launch": 1291,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 732,
+    "solution": "nerve",
+    "print_date": "2025-01-01",
+    "days_since_launch": 1292,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 610,
+    "solution": "chose",
+    "print_date": "2025-01-02",
+    "days_since_launch": 1293,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1317,
+    "solution": "cheap",
+    "print_date": "2025-01-03",
+    "days_since_launch": 1294,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 865,
+    "solution": "relax",
+    "print_date": "2025-01-04",
+    "days_since_launch": 1295,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1105,
+    "solution": "cyber",
+    "print_date": "2025-01-05",
+    "days_since_launch": 1296,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1825,
+    "solution": "sprig",
+    "print_date": "2025-01-06",
+    "days_since_launch": 1297,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2362,
+    "solution": "atlas",
+    "print_date": "2025-01-07",
+    "days_since_launch": 1298,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1290,
+    "solution": "draft",
+    "print_date": "2025-01-08",
+    "days_since_launch": 1299,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1854,
+    "solution": "wafer",
+    "print_date": "2025-01-09",
+    "days_since_launch": 1300,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1639,
+    "solution": "crawl",
+    "print_date": "2025-01-10",
+    "days_since_launch": 1301,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1798,
+    "solution": "dingy",
+    "print_date": "2025-01-11",
+    "days_since_launch": 1302,
+    "editor": "Tracy Bennett"
   }
 ]
