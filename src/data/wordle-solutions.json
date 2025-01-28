@@ -9118,5 +9118,110 @@
     "print_date": "2025-01-11",
     "days_since_launch": 1302,
     "editor": "Tracy Bennett"
+  },
+  {
+    "id": 548,
+    "solution": "total",
+    "print_date": "2025-01-12",
+    "days_since_launch": 1303,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1567,
+    "solution": "cloak",
+    "print_date": "2025-01-13",
+    "days_since_launch": 1304,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 993,
+    "solution": "fancy",
+    "print_date": "2025-01-14",
+    "days_since_launch": 1305,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1593,
+    "solution": "knack",
+    "print_date": "2025-01-15",
+    "days_since_launch": 1306,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 861,
+    "solution": "flint",
+    "print_date": "2025-01-16",
+    "days_since_launch": 1307,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 748,
+    "solution": "prose",
+    "print_date": "2025-01-17",
+    "days_since_launch": 1308,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 996,
+    "solution": "silly",
+    "print_date": "2025-01-18",
+    "days_since_launch": 1309,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2284,
+    "solution": "rower",
+    "print_date": "2025-01-19",
+    "days_since_launch": 1310,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 2353,
+    "solution": "squid",
+    "print_date": "2025-01-20",
+    "days_since_launch": 1311,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 742,
+    "solution": "icing",
+    "print_date": "2025-01-21",
+    "days_since_launch": 1312,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1352,
+    "solution": "reach",
+    "print_date": "2025-01-22",
+    "days_since_launch": 1313,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1413,
+    "solution": "upper",
+    "print_date": "2025-01-23",
+    "days_since_launch": 1314,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1592,
+    "solution": "crepe",
+    "print_date": "2025-01-24",
+    "days_since_launch": 1315,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 1675,
+    "solution": "crisp",
+    "print_date": "2025-01-25",
+    "days_since_launch": 1316,
+    "editor": "Tracy Bennett"
+  },
+  {
+    "id": 669,
+    "solution": "sunny",
+    "print_date": "2025-01-26",
+    "days_since_launch": 1317,
+    "editor": "Tracy Bennett"
   }
 ]
